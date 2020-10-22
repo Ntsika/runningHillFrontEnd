@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {SentenceModule} from '../Models/sentence/sentence.module';
 import {WordModule} from '../Models/word/word.module';
-import {observable} from 'rxjs';
+import {WebService} from '../Controller/web.service';
 
 @Component({
   selector: 'app-sentence-constructor',
@@ -15,38 +15,50 @@ export class SentenceConstructorComponent implements OnInit {
   availableWords: WordModule[] = [];
   wordTypes: string[] = [];
   sentenceText: string = '';
-  selectedType: string = '';
 
-  constructor() {
-  //  populate typelist and sentence history
+  constructor(private webService: WebService) {
+
   }
 
   ngOnInit(): void {
+    //  populate typelist and sentence history
+    this.updateSentenceHistory();
+    this.getAllTypes();
+  }
+
+  addWordToSentence(word: WordModule): void {
+    if (word.type === 'Punctuation'){
+      this.sentenceText += word.text;
+    }else{
+      this.sentenceText += ' ' + word.text;
+    }
 
   }
 
-  addWordToSentence(){
-
+  addSentence(): void {
+    this.webService.post('addSentence', this.sentenceText).subscribe((res: any) => {
+      console.log(res);
+      this.sentenceText = '';
+      this.updateSentenceHistory();
+    });
   }
 
-  addSentence(){
-
+  getAllTypes(): void {
+    this.webService.get('allTypes').subscribe((result: string) => {
+      this.wordTypes = [...result];
+    });
   }
 
-  getAllTypes(){
-
+  selectType(type: string): void {
+    this.webService.get('words/' + type).subscribe((result: WordModule[]) => {
+      this.availableWords = result;
+    });
   }
 
-  selectType(type: string){
-
-  }
-
-  populateWords(type: string){
-
-  }
-
-  updateSentenceHistory(){
-
+  updateSentenceHistory(): void {
+    this.webService.get('sentenceHistory').subscribe((result: SentenceModule[]) => {
+      this.sentenceHistory = result;
+    });
   }
 
 
