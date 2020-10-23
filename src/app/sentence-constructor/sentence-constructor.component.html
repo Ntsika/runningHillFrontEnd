@@ -4,15 +4,16 @@
   </div>
   <div class="wordsContainer">
     <div class="typeListContainer container">
+      <p class="label">please select a word type from the list below</p>
       <div class="typeList">
         <a class="wordType" *ngFor="let type of wordTypes" (click)="selectType(type.WordType)">{{type.WordType}}<br/></a>
       </div>
     </div>
     <div class="wordListContainer">
+      <p class="label">please select a word to add to the sentence</p>
       <div class="wordList">
         <a class="words" *ngFor="let word of availableWords" (click)="addWordToSentence(word.WORD)">{{word.WORD}}<br/></a>
       </div>
-      <button class="addToSentence">Add word to sentence</button>
       <button class="submitSentence" (click)="addSentence()">Submit Sentence</button>
     </div>
   </div>

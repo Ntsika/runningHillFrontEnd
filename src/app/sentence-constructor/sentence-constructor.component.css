@@ -1,0 +1,53 @@
+.componentContainer{
+  margin: auto 0 ;
+  width: 300px;
+  border: 3px solid black;
+}
+a{
+  display: inline-block;
+  height: 20px;
+  width: 100%;
+  border: 1px solid black;
+  text-align: center;
+}
+.label{
+  text-align: center;
+}
+.currentSentenceContainer{
+  width: 100%;
+  margin: 10px auto;
+  border: 2px solid navy;
+}
+.currentSentence{
+  width: 98%;
+  margin: 0 auto;
+  text-align: left;
+  font-size: 12px;
+}
+
+.wordListContainer{
+  background-color: #343d52;
+  min-block-size: 50px;
+  display: inline-block;
+  width: 100%
+
+}
+.wordListContainer>.label{
+  color: white;
+  text-align: center;
+}
+
+ a.words{
+  color: wheat;
+}
+ .submitSentence{
+   margin: auto;
+   padding: auto;
+   width: fit-content;
+ }
+ .sentenceHistoryContainer{
+   background-color: beige;
+   padding: 0;
+   border: 0;
+ }
+
