@@ -31,7 +31,7 @@ export class SentenceConstructorComponent implements OnInit {
   }
 
   addSentence(): void {
-    console.log("add sentence");
+    console.log('add sentence');
     this.webService.post('addSentence', this.sentenceText).subscribe((res: any) => {
       console.log(res);
       this.sentenceText = '';
@@ -40,7 +40,7 @@ export class SentenceConstructorComponent implements OnInit {
   }
 
   getAllTypes(): void {
-    console.log("get all types");
+    console.log('get all types');
     this.webService.get('wordTypes').subscribe((result: WordTypesModule[]) => {
       console.log(result);
       this.wordTypes = result;
@@ -48,7 +48,7 @@ export class SentenceConstructorComponent implements OnInit {
   }
 
   selectType(type: string): void {
-    console.log("select type");
+    console.log('select type');
     this.webService.getWords('words', type).subscribe((result: WordModule[]) => {
       console.log(result);
       this.availableWords = result;
@@ -57,7 +57,7 @@ export class SentenceConstructorComponent implements OnInit {
   }
 
   updateSentenceHistory(): void {
-    console.log("update sentence history");
+    console.log('update sentence history');
     this.webService.get('sentenceHistory').subscribe((result: SentenceModule[]) => {
       console.log(result);
       this.sentenceHistory = result;
