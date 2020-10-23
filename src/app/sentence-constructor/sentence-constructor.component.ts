@@ -3,6 +3,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {SentenceModule} from '../Models/sentence/sentence.module';
 import {WordModule} from '../Models/word/word.module';
 import {WebService} from '../Controller/web.service';
+import {WordTypesModule} from '../Models/word-types/word-types.module';
 
 @Component({
   selector: 'app-sentence-constructor',
@@ -11,9 +12,9 @@ import {WebService} from '../Controller/web.service';
 })
 export class SentenceConstructorComponent implements OnInit {
 
-  sentenceHistory: SentenceModule [] = [];
-  availableWords: WordModule[] = [];
-  wordTypes: string[] = [];
+  sentenceHistory: SentenceModule [] = null;
+  availableWords: WordModule[]  = null;
+  wordTypes: WordTypesModule[] = null;
   sentenceText: string = '';
 
   constructor(private webService: WebService) {
@@ -22,20 +23,15 @@ export class SentenceConstructorComponent implements OnInit {
 
   ngOnInit(): void {
     //  populate typelist and sentence history
-    this.updateSentenceHistory();
     this.getAllTypes();
   }
 
-  addWordToSentence(word: WordModule): void {
-    if (word.type === 'Punctuation'){
-      this.sentenceText += word.text;
-    }else{
-      this.sentenceText += ' ' + word.text;
-    }
-
+  addWordToSentence(word: string): void {
+    this.sentenceText += ' ' + word;
   }
 
   addSentence(): void {
+    console.log("add sentence");
     this.webService.post('addSentence', this.sentenceText).subscribe((res: any) => {
       console.log(res);
       this.sentenceText = '';
@@ -44,19 +40,26 @@ export class SentenceConstructorComponent implements OnInit {
   }
 
   getAllTypes(): void {
-    this.webService.get('allTypes').subscribe((result: string) => {
-      this.wordTypes = [...result];
+    console.log("get all types");
+    this.webService.get('wordTypes').subscribe((result: WordTypesModule[]) => {
+      console.log(result);
+      this.wordTypes = result;
     });
   }
 
   selectType(type: string): void {
-    this.webService.get('words/' + type).subscribe((result: WordModule[]) => {
+    console.log("select type");
+    this.webService.getWords('words', type).subscribe((result: WordModule[]) => {
+      console.log(result);
       this.availableWords = result;
+      console.log(this.availableWords);
     });
   }
 
   updateSentenceHistory(): void {
+    console.log("update sentence history");
     this.webService.get('sentenceHistory').subscribe((result: SentenceModule[]) => {
+      console.log(result);
       this.sentenceHistory = result;
     });
   }

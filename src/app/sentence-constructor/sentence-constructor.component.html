@@ -1,21 +1,23 @@
-<p>sentence-constructor works!</p>
 <div class="componentContainer">
   <div class="currentSentenceContainer">
-    <textarea class="currentSentence"></textarea>
+    <textarea class="currentSentence">{{sentenceText}}</textarea>
   </div>
   <div class="wordsContainer">
     <div class="typeListContainer container">
       <div class="typeList">
-        <a class="wordType">type type here</a>
+        <a class="wordType" *ngFor="let type of wordTypes" (click)="selectType(type.WordType)">{{type.WordType}}<br/></a>
       </div>
     </div>
     <div class="wordListContainer">
       <div class="wordList">
-        <a class="words">type possible words here</a>
+        <a class="words" *ngFor="let word of availableWords" (click)="addWordToSentence(word.WORD)">{{word.WORD}}<br/></a>
       </div>
+      <button class="addToSentence">Add word to sentence</button>
+      <button class="submitSentence" (click)="addSentence()">Submit Sentence</button>
     </div>
   </div>
   <div class="sentenceHistoryContainer">
-    <textarea class="sentenceHistory">type sentences here</textarea>
+    <p *ngFor="let sentence of sentenceHistory">{{sentence.sentenceText}}<br></p>
+
   </div>
 </div>

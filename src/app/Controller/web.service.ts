@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 
 @Injectable({
@@ -14,8 +14,11 @@ export class WebService {
   get(uri: string){
     return this.http.get(`${this.ROOT_URL}/${uri}`);
   }
-
-  post(uri: string, payload: Object){
+  getWords(uri: string, data: string){
+    const options = {params:new HttpParams().set('wordType', data)};
+    return this.http.get(`${this.ROOT_URL}/${uri}`, options);
+  }
+  post(uri: string, payload: string){
     return this.http.post(`${this.ROOT_URL}/${uri}`, payload);
   }
 }

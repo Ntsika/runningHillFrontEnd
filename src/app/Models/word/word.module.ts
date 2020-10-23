@@ -10,6 +10,5 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class WordModule {
-  text: string;
-  type: string;
+  WORD: string;
 }

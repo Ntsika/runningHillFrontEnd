@@ -9,5 +9,5 @@ import {HttpClientModule} from '@angular/common/http';
 export class AppComponent {
   title = 'runningHillFrontEnd';
 
-  readonly ROOT_URL = 'http://jsonplaceholder.typicode.com/';
+  readonly ROOT_URL = 'http://http://localhost:3000/';
 }
